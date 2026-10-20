@@ -18,6 +18,10 @@
 #define FC_TARGET_MCU     STM32H743
 #define SYSTEM_HSE_MHZ    8
 
+/* Ensure ADC3 is explicitly clocked/configured before H743 internal ADC use. */
+#define USE_ADC3_DIRECT_HAL_INIT
+#define ADC_INTERNAL_SAMPLE_SHIFT 1 /* H743 internal ADC samples currently read at 2x scale */
+
 #define BOARD_NAME        HSI_H743
 #define MANUFACTURER_ID   HSI
 
@@ -25,8 +29,11 @@
 #define USE_ACC
 #define USE_GYRO
 #define USE_ACCGYRO_BMI270
+#define USE_ACCGYRO_BMI088
 #define USE_BARO
 #define USE_BARO_BMP581
+#define DEFAULT_BARO_BMP581
+#define DEFAULT_BARO_I2C_ADDRESS 70 /* BMP581 address 0x46 */
 #define USE_MAG
 #define USE_MAG_LIS2MDL
 
@@ -70,10 +77,11 @@
 #define ACCEL_1_EXTI_PIN    PB7
 #define GYRO_1_CS_PIN       PA15
 
-/* BMI088 wiring: driver support is not yet implemented */
+/* BMI088 wiring: phase-1 gyro support; separate accelerometer support pending */
 #define SPI2_SCK_PIN       PD3
 #define SPI2_SDI_PIN       PC2
 #define SPI2_SDO_PIN       PC3
+#define GYRO_2_SPI_INSTANCE SPI2
 #define ACCEL_2_CS_PIN     PD4
 #define GYRO_2_CS_PIN      PD5
 #define ACCEL_2_EXTI_PIN   PC14
@@ -105,6 +113,7 @@
 #define ADC_VBAT_PIN       PC0
 #define ADC_CURR_PIN       PC1
 #define ADC1_DMA_OPT       0
+#define ADC3_DMA_OPT       10 /* ADC3 DMA2 stream/request mapping for STM32H743 */
 
 /* CAN1 */
 #define CAN1_RX_PIN        PD0
@@ -119,10 +128,13 @@
 #define POWER_GOOD_12V_PIN   PD10
 #define POWER_GOOD_5V_PIN    PE12
 #define POWER_GOOD_EXT5V_PIN PE15
-#define LED_RED_PIN          PE3
-#define LED_GREEN_PIN        PE2
-#define LED_BLUE_PIN         PE4
-#define LED0_PIN             PE10
+#define LED0_PIN             PE3 /* RGB red */
+#define LED1_PIN             PE2 /* RGB green */
+#define LED2_PIN             PE4 /* RGB blue */
+#define LED0_OPEN_DRAIN
+#define LED1_OPEN_DRAIN
+#define LED2_OPEN_DRAIN
+/* PE10 is a separate heartbeat signal and is not currently driven by Betaflight. */
 
 /* Motor outputs from the EP-PILOT pinout. */
 #define MOTOR1_PIN         PE14
