@@ -20,7 +20,6 @@
 
 /* Ensure ADC3 is explicitly clocked/configured before H743 internal ADC use. */
 #define USE_ADC3_DIRECT_HAL_INIT
-#define ADC_INTERNAL_SAMPLE_SHIFT 1 /* H743 internal ADC samples currently read at 2x scale */
 
 #define BOARD_NAME        HSI_H743
 #define MANUFACTURER_ID   HSI
@@ -29,7 +28,6 @@
 #define USE_ACC
 #define USE_GYRO
 #define USE_ACCGYRO_BMI270
-#define USE_ACCGYRO_BMI088
 #define USE_BARO
 #define USE_BARO_BMP581
 #define DEFAULT_BARO_BMP581
@@ -77,7 +75,7 @@
 #define ACCEL_1_EXTI_PIN    PB7
 #define GYRO_1_CS_PIN       PA15
 
-/* BMI088 wiring: phase-1 gyro support; separate accelerometer support pending */
+/* BMI088 wiring reserved for future driver support. */
 #define SPI2_SCK_PIN       PD3
 #define SPI2_SDI_PIN       PC2
 #define SPI2_SDO_PIN       PC3
