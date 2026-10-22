@@ -137,6 +137,7 @@
 /* PE10 is a separate heartbeat signal and is not currently driven by Betaflight. */
 
 /* Motor outputs from the EP-PILOT pinout. */
+#define MAX_SUPPORTED_MOTORS 10
 #define MOTOR1_PIN         PE14
 #define MOTOR2_PIN         PE13
 #define MOTOR3_PIN         PE11
