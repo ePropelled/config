@@ -120,15 +120,17 @@
 /* Board controls and indicators */
 #define BUZZER_PIN           PD15
 #define LED_STRIP_PIN        PD14
+#define USE_HSI_RGB_STATUS
+#define HEARTBEAT_LED_PIN    PE10
 #define HEATER_PIN           PE8
 #define ARMED_PIN            PB2
 #define VDD_3V3_EXT_EN       PA8
 #define POWER_GOOD_12V_PIN   PD10
 #define POWER_GOOD_5V_PIN    PE12
 #define POWER_GOOD_EXT5V_PIN PE15
-#define LED0_PIN             PE3 /* RGB red */
+#define LED0_PIN             PE4 /* RGB blue */
 #define LED1_PIN             PE2 /* RGB green */
-#define LED2_PIN             PE4 /* RGB blue */
+#define LED2_PIN             PE3 /* RGB red; LED2 renders amber with green */
 #define LED0_OPEN_DRAIN
 #define LED1_OPEN_DRAIN
 #define LED2_OPEN_DRAIN
